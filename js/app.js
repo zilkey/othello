@@ -1,8 +1,9 @@
 "use strict";
 
 // 0 = blank, 1 = white, 2 = black
-var Othello = function(){
-  this.turn = 2;
+var Othello = function(board, turn){
+  this._board = board;
+  this.turn = turn || 2;
 };
 
 Othello.columnNames = {a:0, b:1, c:2, d:3, e:4, f:5, g:6, h:7};
