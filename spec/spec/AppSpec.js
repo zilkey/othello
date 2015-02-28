@@ -39,7 +39,7 @@ describe("Othello Board", function() {
     expect(othello.turn).toEqual(1);
   });
 
-  it("can flip pieces S", function() {
+  it("can flip single pieces south", function() {
     var othello = new Othello();
     othello.place(2, 'd', 3);
     expect(othello.board()).toEqual([
@@ -55,7 +55,7 @@ describe("Othello Board", function() {
     expect(othello.turn).toEqual(1); // white
   });
 
-  it("can flip pieces E", function() {
+  it("can flip single pieces east", function() {
     var othello = new Othello();
     othello.place(2, 'c', 4);
     expect(othello.board()).toEqual([
@@ -70,7 +70,7 @@ describe("Othello Board", function() {
     ]);
   });
 
-  it("can flip pices N", function() {
+  it("can flip single pieces north", function() {
     var othello = new Othello();
     othello.place(2, 'e', 6);
     expect(othello.board()).toEqual([
@@ -85,7 +85,7 @@ describe("Othello Board", function() {
     ]);
   });
 
-  it("can flip pieces W", function() {
+  it("can flip single pieces west", function() {
     var othello = new Othello();
     othello.place(2, 'f', 5);
     expect(othello.board()).toEqual([
@@ -100,7 +100,7 @@ describe("Othello Board", function() {
     ]);
   });
 
-  it("can flip pieces diagonally NE", function() {
+  it("can flip single pieces diagonally northeast", function() {
     var othello = new Othello([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
@@ -124,7 +124,7 @@ describe("Othello Board", function() {
     ]);
   });
 
-  it("can flip pieces diagonally SE", function() {
+  it("can flip single pieces diagonally southeast", function() {
     var othello = new Othello([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
@@ -148,7 +148,7 @@ describe("Othello Board", function() {
     ]);
   });
 
-  it("can flip pieces diagonally NW", function() {
+  it("can flip single pieces diagonally northwest", function() {
     var othello = new Othello([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
@@ -172,7 +172,7 @@ describe("Othello Board", function() {
     ]);
   });
 
-  it("can flip pieces diagonally SW", function() {
+  it("can flip single pieces diagonally southwest", function() {
     var othello = new Othello([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
