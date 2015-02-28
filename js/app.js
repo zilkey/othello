@@ -50,5 +50,20 @@ Othello.prototype.place = function (value, columnName, rowName) {
   if(this._board[point.y][point.x - 1] === opposite && this._board[point.y][point.x - 2] === value) {
     this._board[point.y][point.x - 1] = value;
   }
+  if(this._board[point.y + 1][point.x + 1] === opposite && this._board[point.y + 2][point.x + 2] === value) {
+    this._board[point.y + 1][point.x + 1] = value;
+  }
+  if(this._board[point.y - 1][point.x - 1] === opposite && this._board[point.y - 2][point.x - 2] === value) {
+    this._board[point.y - 1][point.x - 1] = value;
+  }
+  if(this._board[point.y + 1][point.x - 1] === opposite && this._board[point.y + 2][point.x - 2] === value) {
+    this._board[point.y + 1][point.x - 1] = value;
+  }
+  if(this._board[point.y + 1][point.x - 1] === opposite && this._board[point.y + 2][point.x - 2] === value) {
+    this._board[point.y + 1][point.x - 1] = value;
+  }
+  if(this._board[point.y - 1][point.x + 1] === opposite && this._board[point.y - 2][point.x + 2] === value) {
+    this._board[point.y - 1][point.x + 1] = value;
+  }
   this.turn = opposite;
 };

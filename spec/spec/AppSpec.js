@@ -39,7 +39,7 @@ describe("Othello Board", function() {
     expect(othello.turn).toEqual(1);
   });
 
-  it("allows initial placement of black in d3", function() {
+  it("can flip pieces S", function() {
     var othello = new Othello();
     othello.place(2, 'd', 3);
     expect(othello.board()).toEqual([
@@ -55,7 +55,7 @@ describe("Othello Board", function() {
     expect(othello.turn).toEqual(1); // white
   });
 
-  it("allows initial placement of black in c4", function() {
+  it("can flip pieces E", function() {
     var othello = new Othello();
     othello.place(2, 'c', 4);
     expect(othello.board()).toEqual([
@@ -70,7 +70,7 @@ describe("Othello Board", function() {
     ]);
   });
 
-  it("allows initial placement of black in e6", function() {
+  it("can flip pices N", function() {
     var othello = new Othello();
     othello.place(2, 'e', 6);
     expect(othello.board()).toEqual([
@@ -85,7 +85,7 @@ describe("Othello Board", function() {
     ]);
   });
 
-  it("allows initial placement of black in f5", function() {
+  it("can flip pieces W", function() {
     var othello = new Othello();
     othello.place(2, 'f', 5);
     expect(othello.board()).toEqual([
@@ -93,6 +93,102 @@ describe("Othello Board", function() {
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 1, 2, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+    ]);
+  });
+
+  it("can flip pieces diagonally NE", function() {
+    var othello = new Othello([
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 2, 2, 2, 0, 0, 0],
+      [0, 0, 1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+    ], 2);
+    othello.place(2, 'b', 6);
+    expect(othello.board()).toEqual([
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 2, 2, 2, 0, 0, 0],
+      [0, 0, 2, 1, 1, 0, 0, 0],
+      [0, 2, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+    ]);
+  });
+
+  it("can flip pieces diagonally SE", function() {
+    var othello = new Othello([
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 2, 2, 2, 0, 0, 0],
+      [0, 0, 0, 2, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+    ], 1);
+    othello.place(1, 'c', 3);
+    expect(othello.board()).toEqual([
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 1, 0, 0, 0, 0, 0],
+      [0, 0, 2, 1, 2, 0, 0, 0],
+      [0, 0, 0, 2, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+    ]);
+  });
+
+  it("can flip pieces diagonally NW", function() {
+    var othello = new Othello([
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 2, 0, 0, 0],
+      [0, 0, 0, 2, 2, 2, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+    ], 1);
+    othello.place(1, 'f', 6);
+    expect(othello.board()).toEqual([
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 2, 0, 0, 0],
+      [0, 0, 0, 2, 1, 2, 0, 0],
+      [0, 0, 0, 0, 0, 1, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+    ]);
+  });
+
+  it("can flip pieces diagonally SW", function() {
+    var othello = new Othello([
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 1, 1, 0, 0],
+      [0, 0, 0, 2, 2, 2, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+    ], 2);
+    othello.place(2, 'g', 3);
+    expect(othello.board()).toEqual([
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 2, 0],
+      [0, 0, 0, 1, 1, 2, 0, 0],
       [0, 0, 0, 2, 2, 2, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
