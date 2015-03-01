@@ -99,18 +99,18 @@ Othello.prototype.place = function (value, columnName, rowName) {
   }
 
   // west
-  if(this._board[point.y][point.x + 1] === opposite) {
+  if(this._board[point.y][point.x - 1] === opposite) {
     var canFlipWest = false;
     var piecesToFlip = [];
     var index = 2;
     var keepGoing = true;
-    piecesToFlip.push({y: point.y, x: point.x + 1});
+    piecesToFlip.push({y: point.y, x: point.x - 1});
 
     while (!canFlipWest && keepGoing) {
-      if (this._board[point.y][point.x + index] === value) {
+      if (this._board[point.y][point.x - index] === value) {
         canFlipWest = true;
-      } else if (this._board[point.y][point.x + index] === opposite) {
-        piecesToFlip.push({y: point.y, x: point.x + index});
+      } else if (this._board[point.y][point.x - index] === opposite) {
+        piecesToFlip.push({y: point.y, x: point.x - index});
       } else {
         keepGoing = false;
       }
