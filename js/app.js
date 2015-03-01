@@ -39,113 +39,10 @@ Othello.prototype.place = function (value, columnName, rowName) {
   var opposite = value === 1 ? 2 : 1;
   this._board[point.y][point.x] = value;
 
-  // south
-  if(this._board[point.y + 1] && this._board[point.y + 1][point.x] === opposite) {
-    var canFlipSouth = false;
-    var piecesToFlip = [];
-    var index = 2;
-    var keepGoing = true;
-    piecesToFlip.push({y: point.y + 1, x: point.x});
-
-    while (!canFlipSouth && keepGoing) {
-      if (this._board[point.y + index] && this._board[point.y + index][point.x] === value) {
-        canFlipSouth = true;
-      } else if (this._board[point.y + index] && this._board[point.y + index][point.x] === opposite) {
-        piecesToFlip.push({y: point.y + index, x: point.x});
-      } else {
-        keepGoing = false;
-      }
-      index++;
-    }
-
-    if (canFlipSouth) {
-      for (var i = 0; i < piecesToFlip.length; i++) {
-        var newPoint = piecesToFlip[i];
-        this._board[newPoint.y][newPoint.x] = value;
-      }
-    }
-  }
-
-  // east
-  if(this._board[point.y][point.x + 1] === opposite) {
-    var canFlipWest = false;
-    var piecesToFlip = [];
-    var index = 2;
-    var keepGoing = true;
-    piecesToFlip.push({y: point.y, x: point.x + 1});
-
-    while (!canFlipWest && keepGoing) {
-      if (this._board[point.y][point.x + index] === value) {
-        canFlipWest = true;
-      } else if (this._board[point.y][point.x + index] === opposite) {
-        piecesToFlip.push({y: point.y, x: point.x + index});
-      } else {
-        keepGoing = false;
-      }
-      index++;
-    }
-
-    if (canFlipWest) {
-      for (var i = 0; i < piecesToFlip.length; i++) {
-        var newPoint = piecesToFlip[i];
-        this._board[newPoint.y][newPoint.x] = value;
-      }
-    }
-  }
-
-  // north
-  if(this._board[point.y - 1] && this._board[point.y - 1][point.x] === opposite) {
-    var canFlipNorth = false;
-    var piecesToFlip = [];
-    var index = 2;
-    var keepGoing = true;
-    piecesToFlip.push({y: point.y - 1, x: point.x});
-
-    while (!canFlipNorth && keepGoing) {
-      if (this._board[point.y - index][point.x] === value) {
-        canFlipNorth = true;
-      } else if (this._board[point.y - index][point.x] === opposite) {
-        piecesToFlip.push({y: point.y - index, x: point.x});
-      } else {
-        keepGoing = false;
-      }
-      index++;
-    }
-
-    if (canFlipNorth) {
-      for (var i = 0; i < piecesToFlip.length; i++) {
-        var newPoint = piecesToFlip[i];
-        this._board[newPoint.y][newPoint.x] = value;
-      }
-    }
-  }
-
-  // west
-  if(this._board[point.y][point.x - 1] === opposite) {
-    var canFlipWest = false;
-    var piecesToFlip = [];
-    var index = 2;
-    var keepGoing = true;
-    piecesToFlip.push({y: point.y, x: point.x - 1});
-
-    while (!canFlipWest && keepGoing) {
-      if (this._board[point.y][point.x - index] === value) {
-        canFlipWest = true;
-      } else if (this._board[point.y][point.x - index] === opposite) {
-        piecesToFlip.push({y: point.y, x: point.x - index});
-      } else {
-        keepGoing = false;
-      }
-      index++;
-    }
-
-    if (canFlipWest) {
-      for (var i = 0; i < piecesToFlip.length; i++) {
-        var newPoint = piecesToFlip[i];
-        this._board[newPoint.y][newPoint.x] = value;
-      }
-    }
-  }
+  this.flipSouth(point, opposite, value);
+  this.flipEast(point, opposite, value);
+  this.flipNorth(point, opposite, value);
+  this.flipWest(point, opposite, value);
 
   // south east
   if(this._board[point.y + 1]) {
@@ -172,4 +69,116 @@ Othello.prototype.place = function (value, columnName, rowName) {
   }
 
   this.turn = opposite;
+};
+
+Othello.prototype.flipSouth = function (point, opposite, value) {
+  if(this._board[point.y + 1] && this._board[point.y + 1][point.x] === opposite) {
+    var canFlipSouth = false;
+    var piecesToFlip = [];
+    var index = 2;
+    var keepGoing = true;
+    piecesToFlip.push({y: point.y + 1, x: point.x});
+
+    while (!canFlipSouth && keepGoing) {
+      if (this._board[point.y + index] && this._board[point.y + index][point.x] === value) {
+        canFlipSouth = true;
+      } else if (this._board[point.y + index] && this._board[point.y + index][point.x] === opposite) {
+        piecesToFlip.push({y: point.y + index, x: point.x});
+      } else {
+        keepGoing = false;
+      }
+      index++;
+    }
+
+    if (canFlipSouth) {
+      for (var i = 0; i < piecesToFlip.length; i++) {
+        var newPoint = piecesToFlip[i];
+        this._board[newPoint.y][newPoint.x] = value;
+      }
+    }
+  }
+};
+
+Othello.prototype.flipEast = function (point, opposite, value) {
+  if(this._board[point.y][point.x + 1] === opposite) {
+    var canFlipWest = false;
+    var piecesToFlip = [];
+    var index = 2;
+    var keepGoing = true;
+    piecesToFlip.push({y: point.y, x: point.x + 1});
+
+    while (!canFlipWest && keepGoing) {
+      if (this._board[point.y][point.x + index] === value) {
+        canFlipWest = true;
+      } else if (this._board[point.y][point.x + index] === opposite) {
+        piecesToFlip.push({y: point.y, x: point.x + index});
+      } else {
+        keepGoing = false;
+      }
+      index++;
+    }
+
+    if (canFlipWest) {
+      for (var i = 0; i < piecesToFlip.length; i++) {
+        var newPoint = piecesToFlip[i];
+        this._board[newPoint.y][newPoint.x] = value;
+      }
+    }
+  }
+};
+
+Othello.prototype.flipNorth = function (point, opposite, value) {
+  if(this._board[point.y - 1] && this._board[point.y - 1][point.x] === opposite) {
+    var canFlipNorth = false;
+    var piecesToFlip = [];
+    var index = 2;
+    var keepGoing = true;
+    piecesToFlip.push({y: point.y - 1, x: point.x});
+
+    while (!canFlipNorth && keepGoing) {
+      if (this._board[point.y - index][point.x] === value) {
+        canFlipNorth = true;
+      } else if (this._board[point.y - index][point.x] === opposite) {
+        piecesToFlip.push({y: point.y - index, x: point.x});
+      } else {
+        keepGoing = false;
+      }
+      index++;
+    }
+
+    if (canFlipNorth) {
+      for (var i = 0; i < piecesToFlip.length; i++) {
+        var newPoint = piecesToFlip[i];
+        this._board[newPoint.y][newPoint.x] = value;
+      }
+    }
+  }
+};
+
+Othello.prototype.flipWest = function (point, opposite, value) {
+  if(this._board[point.y][point.x - 1] === opposite) {
+    var canFlipWest = false;
+    var piecesToFlip = [];
+    var index = 2;
+    var keepGoing = true;
+    piecesToFlip.push({y: point.y, x: point.x - 1});
+
+    while (!canFlipWest && keepGoing) {
+      if (this._board[point.y][point.x - index] === value) {
+        canFlipWest = true;
+      } else if (this._board[point.y][point.x - index] === opposite) {
+        piecesToFlip.push({y: point.y, x: point.x - index});
+      } else {
+        keepGoing = false;
+      }
+      index++;
+    }
+
+    if (canFlipWest) {
+      for (var i = 0; i < piecesToFlip.length; i++) {
+        var newPoint = piecesToFlip[i];
+        this._board[newPoint.y][newPoint.x] = value;
+      }
+    }
+  }
 };
