@@ -26,10 +26,11 @@ Othello.prototype._ensureBoard = function () {
         this._board[i][j] = 0;
       }
     }
-    this.place(2, 'd', 5);
-    this.place(1, 'e', 5);
-    this.place(2, 'e', 4);
-    this.place(1, 'd', 4);
+    this._board[3][3] = 1;
+    this._board[3][4] = 2;
+    this._board[4][3] = 2;
+    this._board[4][4] = 1;
+    this.turn = 2;
   }
 };
 
@@ -44,26 +45,29 @@ Othello.directions = {
   southeastOf: function(point) { return {y: point.y + 1, x: point.x + 1}; },
 }
 
-Othello.prototype.place = function (value, columnName, rowName) {
+Othello.prototype.move = function (value, columnName, rowName) {
   this._ensureBoard();
   var point = this._translate(columnName, rowName);
   var opposite = value === 1 ? 2 : 1;
-  this._board[point.y][point.x] = value;
 
+  var result = [];
   for (var direction in Othello.directions) {
-    this.flip(point, opposite, value, Othello.directions[direction]);
+    result = result.concat(this.flip(point, opposite, value, Othello.directions[direction]));
   }
 
   this.turn = opposite;
+  return new Move(value, point, result);
 };
 
 Othello.prototype.flip = function (point, opposite, value, fn) {
   var newPoint = fn(point);
+  var result = [];
   if(this._board[newPoint.y] && this._board[newPoint.y][newPoint.x] === opposite) {
     var canFlip = false;
-    var piecesToFlip = [];
     var index = 2;
+    var piecesToFlip = [];
     var keepGoing = true;
+    piecesToFlip.push(point);
     piecesToFlip.push(newPoint);
 
     while (!canFlip && keepGoing) {
@@ -81,8 +85,16 @@ Othello.prototype.flip = function (point, opposite, value, fn) {
     if (canFlip) {
       for (var i = 0; i < piecesToFlip.length; i++) {
         newPoint = piecesToFlip[i];
+        result.push(newPoint);
         this._board[newPoint.y][newPoint.x] = value;
       }
     }
   }
+  return result;
+};
+
+var Move = function (player, point, piecesTurned) {
+  this.player = player;
+  this.point = point;
+  this.piecesTurned = piecesTurned;
 };

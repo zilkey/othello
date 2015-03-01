@@ -50,7 +50,7 @@ describe("Othello Board", function() {
       [0, 0, 0, 0, 1, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
     ], 2);
-    othello.place(2, 'e', 8);
+    var move = othello.move(2, 'e', 8);
     expect(othello.board()).toEqual([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
@@ -61,6 +61,10 @@ describe("Othello Board", function() {
       [0, 0, 0, 0, 2, 0, 0, 0],
       [0, 0, 0, 0, 2, 0, 0, 0],
     ]);
+    expect(move.piecesTurned[0]).toEqual({x: 4, y: 7});
+    expect(move.piecesTurned[1]).toEqual({x: 4, y: 6});
+    expect(move.piecesTurned[2]).toEqual({x: 4, y: 5});
+    expect(move.piecesTurned[3]).toEqual({x: 4, y: 4});
   });
 
   it("can flip pieces south", function() {
@@ -74,7 +78,7 @@ describe("Othello Board", function() {
       [0, 0, 0, 0, 2, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
     ], 2);
-    othello.place(2, 'e', 1);
+    var move = othello.move(2, 'e', 1);
     expect(othello.board()).toEqual([
       [0, 0, 0, 0, 2, 0, 0, 0],
       [0, 0, 0, 0, 2, 0, 0, 0],
@@ -98,7 +102,7 @@ describe("Othello Board", function() {
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
     ], 2);
-    othello.place(2, 'h', 3);
+    var move = othello.move(2, 'h', 3);
     expect(othello.board()).toEqual([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
@@ -122,7 +126,7 @@ describe("Othello Board", function() {
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
     ], 2);
-    othello.place(2, 'a', 3);
+    var move = othello.move(2, 'a', 3);
     expect(othello.board()).toEqual([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
@@ -146,7 +150,7 @@ describe("Othello Board", function() {
       [0, 1, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
     ], 2);
-    othello.place(2, 'a', 8);
+    var move = othello.move(2, 'a', 8);
     expect(othello.board()).toEqual([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
@@ -170,7 +174,7 @@ describe("Othello Board", function() {
       [0, 0, 0, 0, 0, 0, 1, 0],
       [0, 0, 0, 0, 0, 0, 0, 2],
     ], 2);
-    othello.place(2, 'b', 2);
+    var move = othello.move(2, 'b', 2);
     expect(othello.board()).toEqual([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 2, 0, 0, 0, 0, 0, 0],
@@ -194,7 +198,7 @@ describe("Othello Board", function() {
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
     ], 1);
-    othello.place(2, 'g', 7);
+    var move = othello.move(2, 'g', 7);
     expect(othello.board()).toEqual([
       [2, 0, 0, 0, 0, 0, 0, 0],
       [0, 2, 0, 0, 0, 0, 0, 0],
@@ -218,7 +222,7 @@ describe("Othello Board", function() {
       [0, 1, 0, 0, 0, 0, 0, 0],
       [2, 0, 0, 0, 0, 0, 0, 0],
     ], 2);
-    othello.place(2, 'f', 3);
+    var move = othello.move(2, 'f', 3);
     expect(othello.board()).toEqual([
       [0, 0, 0, 0, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, 0],
