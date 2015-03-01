@@ -38,6 +38,10 @@ Othello.directions = {
   eastOf: function(point) { return {y: point.y, x: point.x + 1}; },
   northOf: function(point) { return {y: point.y - 1, x: point.x}; },
   westOf: function(point) { return {y: point.y, x: point.x - 1}; },
+  northeastOf: function(point) { return {y: point.y - 1, x: point.x + 1}; },
+  southwestOf: function(point) { return {y: point.y + 1, x: point.x - 1}; },
+  northwestOf: function(point) { return {y: point.y - 1, x: point.x - 1}; },
+  southeastOf: function(point) { return {y: point.y + 1, x: point.x + 1}; },
 }
 
 Othello.prototype.place = function (value, columnName, rowName) {
@@ -46,33 +50,8 @@ Othello.prototype.place = function (value, columnName, rowName) {
   var opposite = value === 1 ? 2 : 1;
   this._board[point.y][point.x] = value;
 
-  this.flip(point, opposite, value, Othello.directions.northOf);
-  this.flip(point, opposite, value, Othello.directions.eastOf);
-  this.flip(point, opposite, value, Othello.directions.southOf);
-  this.flip(point, opposite, value, Othello.directions.westOf);
-
-  // south east
-  if(this._board[point.y + 1]) {
-    if(this._board[point.y + 1][point.x + 1] === opposite && this._board[point.y + 2][point.x + 2] === value) {
-      this._board[point.y + 1][point.x + 1] = value;
-    }
-  }
-
-  // north west
-  if(this._board[point.y - 1] && this._board[point.y - 1][point.x - 1] === opposite && this._board[point.y - 2][point.x - 2] === value) {
-    this._board[point.y - 1][point.x - 1] = value;
-  }
-
-  // south west
-  if(this._board[point.y + 1]) {
-    if(this._board[point.y + 1][point.x - 1] === opposite && this._board[point.y + 2][point.x - 2] === value) {
-      this._board[point.y + 1][point.x - 1] = value;
-    }
-  }
-
-  // north east
-  if(this._board[point.y - 1] && this._board[point.y - 1][point.x + 1] === opposite && this._board[point.y - 2][point.x + 2] === value) {
-    this._board[point.y - 1][point.x + 1] = value;
+  for (var direction in Othello.directions) {
+    this.flip(point, opposite, value, Othello.directions[direction]);
   }
 
   this.turn = opposite;
