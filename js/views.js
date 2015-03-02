@@ -8,20 +8,22 @@ var BoardView = function ($container, game) {
 
 BoardView.prototype.render = function (move) {
   var $piece, $cell;
-  move.piecesTurned.forEach(function (point) {
-    $cell = this.grid[point.y][point.x];
-    $piece = $cell.find('.piece');
-    if ($piece.length === 0) {
-      $piece = $('<div class="piece">');
-      $cell.append($piece);
-    }
+  move.piecesTurned.forEach(function (point, i) {
+    setTimeout(function () {
+      $cell = this.grid[point.y][point.x];
+      $piece = $cell.find('.piece');
+      if ($piece.length === 0) {
+        $piece = $('<div class="piece">');
+        $cell.append($piece);
+      }
 
-    if (move.player === 1) {
-      $piece.addClass('white').removeClass('black');
-    }
-    else {
-      $piece.addClass('black').removeClass('white');
-    }
+      if (move.player === 1) {
+        $piece.removeClass('black').addClass('white');
+      }
+      else {
+        $piece.removeClass('white').addClass('black');
+      }
+    }.bind(this), 10 * i);
   }.bind(this));
 }
 
