@@ -4,12 +4,7 @@
 var Othello = function(board, turn){
   this._board = board;
   this.turn = turn || 2;
-};
-
-Othello.columnNames = {a:0, b:1, c:2, d:3, e:4, f:5, g:6, h:7};
-
-Othello.prototype._translate = function (columnName, rowName) {
-  return {x: Othello.columnNames[columnName], y: rowName - 1};
+  this._callbacks = [];
 };
 
 Othello.prototype.board = function () {
@@ -45,18 +40,28 @@ Othello.directions = {
   southeastOf: function(point) { return {y: point.y + 1, x: point.x + 1}; },
 }
 
-Othello.prototype.move = function (value, columnName, rowName) {
+Othello.prototype.onMove = function (callback) {
+  this._callbacks.push(callback);
+};
+
+Othello.prototype.move = function (value, x, y) {
   this._ensureBoard();
-  var point = this._translate(columnName, rowName);
+  var point = {y: y, x: x};
   var opposite = value === 1 ? 2 : 1;
 
   var result = [];
   for (var direction in Othello.directions) {
     result = result.concat(this.flip(point, opposite, value, Othello.directions[direction]));
-  }
+  };
 
-  this.turn = opposite;
-  return new Move(value, point, result);
+  if(result.length > 0) {
+    this.turn = opposite;
+    var move = new Move(value, point, result);
+    this._callbacks.forEach(function (callback) {
+      callback(move);
+    });
+  }
+  return move;
 };
 
 Othello.prototype.flip = function (point, opposite, value, fn) {
